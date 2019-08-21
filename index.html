@@ -1,210 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Thời Khóa Biểu</title>
-        <link href="https://fonts.googleapis.com/css?family=Pangolin&display=swap" rel="stylesheet">
-        <style>
-            * { box-sizing: border-box; }
 
-            body {
-                font-family: 'Pangolin', cursive;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thời Khóa Biểu</title>
+    <link href="https://fonts.googleapis.com/css?family=Pangolin&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pangolin', cursive;
+        }
+
+        /* ---- title ---- */
+        .title {
+            text-align: center;
+            margin-bottom: 0.67em;
+        }
+
+        /* ---- button ---- */
+
+        .button {
+            display: inline-block;
+            padding: 10px 18px;
+            margin-bottom: 10px;
+            background: #EEE;
+            border: none;
+            border-radius: 7px;
+            background-image: linear-gradient(to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2));
+            color: #222;
+            font-family: sans-serif;
+            font-size: 16px;
+            text-shadow: 0 1px white;
+            cursor: pointer;
+            outline: none;
+            font-family: 'Pangolin', cursive;
+        }
+
+        .button:hover {
+            background-color: #8CF;
+            text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
+            color: #222;
+        }
+
+        .button:active,
+        .button.is-checked {
+            background-color: #28F;
+        }
+
+        .button.is-checked {
+            color: white;
+            text-shadow: 0 -1px hsla(0, 0%, 0%, 0.8);
+        }
+
+        .button:active {
+            box-shadow: inset 0 1px 10px hsla(0, 0%, 0%, 0.8);
+        }
+
+        /* ---- button-group ---- */
+
+        .button-group:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .button-group .button {
+            float: left;
+            border-radius: 0;
+            margin-left: 0;
+            margin-right: 1px;
+        }
+
+        .button-group .button:first-child {
+            border-radius: 0.5em 0 0 0.5em;
+        }
+
+        .button-group .button:last-child {
+            border-radius: 0 0.5em 0.5em 0;
+        }
+
+        /* ---- isotope ---- */
+
+        .grid {
+            border: 1px solid #333;
+        }
+
+        /* clear fix */
+        .grid:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* ---- .element-item ---- */
+
+        .element-item {
+            position: relative;
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            padding: 10px;
+            background: red;
+            color: #262524;
+        }
+
+        .element-item>* {
+            margin: 0;
+            padding: 0;
+        }
+
+        .element-item .label {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <h1>THỜI KHÓA BIỂU</h1>
+        <p>Lớp 11A4 - Trường THPT Chu Văn An, Thái Nguyên</p>
+    </div>
+
+    <div class="button-group filters-button-group">
+        <button class="button" data-filter="*">All</button>
+        <button class="button monday" data-filter=".monday">Monday</button>
+        <button class="button tuesday" data-filter=".tuesday">Tuesday</button>
+        <button class="button wednesday" data-filter=".wednesday">Wednesday</button>
+        <button class="button thursday" data-filter=".thursday">Thursday</button>
+        <button class="button friday" data-filter=".friday">Friday</button>
+        <button class="button saturday" data-filter=".saturday">Saturday</button>
+        <button class="button sunday" data-filter=".sunday">Sunday</button>
+    </div>
+
+    <div class="grid">
+
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/isotope-layout@2/dist/isotope.pkgd.min.js"></script>
+    <script>
+        var subjects = function () {
+            this.chao_co    = null;
+            this.toan       = null;
+            this.ngu_van    = null;
+            this.sinh_hoc   = null;
+            this.vat_ly     = null;
+            this.hoa_hoc    = null;
+            this.lich_su    = null;
+            this.dia_ly     = null;
+            this.ngoai_ngu  = null;
+            this.gdcd       = null;
+            this.gdqp       = null;
+            this.the_duc    = null;
+            this.cong_nghe  = null;
+            this.tin_hoc    = null;
+            this.sinh_hoat  = null;
+            this.nghi_ngoi  = null;
+            var self = this;
+
+            this.init = function () {
+                self.chao_co        = "<div class='element-item monday'</div><p class='label'>Chào cờ</p>";
+                self.toan           = "<div class='element-item friday saturday'</div><p class='label'>Toán</p>";
+                self.ngu_van        = "<div class='element-item tuesday wednesday thursday'</div><p class='label'>Ngữ văn</p>";
+                self.sinh_hoc       = "<div class='element-item monday tuesday'</div><p class='label'>Sinh học</p>";
+                self.vat_ly         = "<div class='element-item monday tuesday thursday'</div><p class='label'>Vật lý</p>";
+                self.hoa_hoc        = "<div class='element-item wednesday friday'</div><p class='label'>Hóa học</p>";
+                self.lich_su        = "<div class='element-item saturday'</div><p class='label'>Lịch sử</p>";
+                self.dia_ly         = "<div class='element-item friday'</div><p class='label'>Địa lý</p>";
+                self.ngoai_ngu      = "<div class='element-item monday tuesday wednesday thursday'</div><p class='label'>Ngoại ngữ</p>";
+                self.gdcd           = "<div class='element-item saturday'</div><p class='label'>GDCD</p>";
+                self.gdqp           = "<div class='element-item friday'</div><p class='label'>GDQP</p>";
+                self.the_duc        = "<div class='element-item monday thursday'</div><p class='label'>Thể dục</p>";
+                self.cong_nghe      = "<div class='element-item tuesday'</div><p class='label'>Công nghệ</p>";
+                self.tin_hoc        = "<div class='element-item thursday'</div><p class='label'>Tin học</p>";
+                self.sinh_hoat      = "<div class='element-item saturday'</div><p class='label'>Sinh hoạt</p>";
+                self.nghi_ngoi      = "<div class='element-item sunday'</div><p class='label'>Nghỉ ngơi</p>";
+                $('.grid').append(self.chao_co);
+                $('.grid').append(self.toan);
+                $('.grid').append(self.ngu_van);
+                $('.grid').append(self.sinh_hoc);
+                $('.grid').append(self.vat_ly);
+                $('.grid').append(self.hoa_hoc);
+                $('.grid').append(self.lich_su);
+                $('.grid').append(self.dia_ly);
+                $('.grid').append(self.ngoai_ngu);
+                $('.grid').append(self.gdcd);
+                $('.grid').append(self.gdqp);
+                $('.grid').append(self.the_duc);
+                $('.grid').append(self.cong_nghe);
+                $('.grid').append(self.tin_hoc);
+                $('.grid').append(self.sinh_hoat);
+                $('.grid').append(self.nghi_ngoi);
             }
 
-            /* ---- title ---- */
-            .title {
-                text-align: center;
-                margin-bottom: 0.67em;
-            }
+            this.getToDay = function() {
+                var toDay =  new Date().getDay();
 
-            /* ---- button ---- */
-
-            .button {
-                display: inline-block;
-                padding: 10px 18px;
-                margin-bottom: 10px;
-                background: #EEE;
-                border: none;
-                border-radius: 7px;
-                background-image: linear-gradient( to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2) );
-                color: #222;
-                font-family: sans-serif;
-                font-size: 16px;
-                text-shadow: 0 1px white;
-                cursor: pointer;
-                outline: none;
-                font-family: 'Pangolin', cursive;
-            }
-
-            .button:hover {
-                background-color: #8CF;
-                text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
-                color: #222;
-            }
-
-            .button:active,
-            .button.is-checked {
-                background-color: #28F;
-            }
-
-            .button.is-checked {
-                color: white;
-                text-shadow: 0 -1px hsla(0, 0%, 0%, 0.8);
-            }
-
-            .button:active {
-                box-shadow: inset 0 1px 10px hsla(0, 0%, 0%, 0.8);
-            }
-
-            /* ---- button-group ---- */
-
-            .button-group:after {
-                content: '';
-                display: block;
-                clear: both;
-            }
-
-            .button-group .button {
-                float: left;
-                border-radius: 0;
-                margin-left: 0;
-                margin-right: 1px;
-            }
-
-            .button-group .button:first-child { border-radius: 0.5em 0 0 0.5em; }
-            .button-group .button:last-child { border-radius: 0 0.5em 0.5em 0; }
-
-            /* ---- isotope ---- */
-
-            .grid {
-                border: 1px solid #333;
-            }
-
-            /* clear fix */
-            .grid:after {
-                content: '';
-                display: block;
-                clear: both;
-            }
-
-            /* ---- .element-item ---- */
-
-            .element-item {
-                position: relative;
-                float: left;
-                width: 100px;
-                height: 100px;
-                margin: 5px;
-                padding: 10px;
-                background: red;
-                color: #262524;
-            }
-
-            .element-item > * {
-                margin: 0;
-                padding: 0;
-            }
-
-            .element-item .label {
-                font-size: 22px;
-                font-weight: bold;
-                color: white;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div class="title">
-            <h1>THỜI KHÓA BIỂU</h1>
-            <p>Lớp 11A4 - Trường THPT Chu Văn An, Thái Nguyên</p>
-        </div>
-
-        <div class="button-group filters-button-group">
-            <button class="button is-checked" data-filter="*">All</button>
-            <button class="button" data-filter=".monday">Monday</button>
-            <button class="button" data-filter=".tuesday">Tuesday</button>
-            <button class="button" data-filter=".wednesday">Wednesday</button>
-            <button class="button" data-filter=".thursday">Thursday</button>
-            <button class="button" data-filter=".friday">Friday</button>
-            <button class="button" data-filter=".saturday">Saturday</button>
-            <button class="button" data-filter=".sunday">Sunday</button>
-        </div>
-
-        <div class="grid">
-            <div class="element-item monday" </div> <p class="label">Chào cờ</p>
-            </div>
-            <div class="element-item friday saturday" </div> <p class="label">Toán</p>
-            </div>
-            <div class="element-item tuesday wednesday thursday" </div> <p class="label">Ngữ Văn</p>
-            </div>
-            <div class="element-item monday tuesday" </div> <p class="label">Sinh Học</p>
-            </div>
-            <div class="element-item monday tuesday thursday" </div> <p class="label">Vật lý</p>
-            </div>
-            <div class="element-item wednesday friday" </div> <p class="label">Hóa học</p>
-            </div>
-            <div class="element-item saturday" </div> <p class="label">Lịch sử</p>
-            </div>
-            <div class="element-item friday" </div> <p class="label">Địa lý</p>
-            </div>
-            <div class="element-item monday tuesday wednesday thursday" </div> <p class="label">Ngoại ngữ</p>
-            </div>
-            <div class="element-item saturday" </div> <p class="label">GDCD</p>
-            </div>
-            <div class="element-item friday" </div> <p class="label">GDQP</p>
-            </div>
-            <div class="element-item monday thursday" </div> <p class="label">Thể dục</p>
-            </div>
-            <div class="element-item tuesday" </div> <p class="label">Công nghệ</p>
-            </div>
-            <div class="element-item thursday" </div> <p class="label">Tin học</p>
-            </div>
-            <div class="element-item saturday" </div> <p class="label">Sinh hoạt</p>
-            </div>
-        </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/isotope-layout@2/dist/isotope.pkgd.min.js"></script>
-        <script>
-            // external js: isotope.pkgd.js
-
-            // init Isotope
-            var $grid = $('.grid').isotope({
-                itemSelector: '.element-item',
-                layoutMode: 'fitRows'
-            });
-            // filter functions
-            var filterFns = {
-                // show if number is greater than 50
-                numberGreaterThan50: function () {
-                    var number = $(this).find('.number').text();
-                    return parseInt(number, 10) > 50;
-                },
-                // show if name ends with -ium
-                ium: function () {
-                    var name = $(this).find('.name').text();
-                    return name.match(/ium$/);
+                switch (toDay) {
+                    case 0:
+                        return 'sunday';
+                        break;
+                    case 1:
+                        return 'monday';
+                        break;
+                    case 2:
+                        return 'tuesday';
+                        break;
+                    case 3:
+                        return 'wednesday';
+                        break;
+                    case 4:
+                        return 'thursday';
+                        break;
+                    case 5:
+                        return 'friday';
+                        break;
+                    case 6:
+                        return 'saturday';
+                        break;
+                    default:
+                        break;
                 }
-            };
+            }
+        }
 
-            // bind filter button click
-            $('.filters-button-group').on('click', 'button', function () {
+        var grid = new subjects();
+        grid.init();
+
+        // external js: isotope.pkgd.js
+
+        // init Isotope
+        var $grid = $('.grid').isotope({
+            itemSelector: '.element-item',
+            layoutMode: 'fitRows'
+        });
+
+        // bind filter current day of the week
+        $('.button-group .button').each(function() {
+            if ($(this).hasClass(grid.getToDay())) {
+                $(this).addClass('is-checked');
                 var filterValue = $(this).attr('data-filter');
                 // use filterFn if matches value
-                filterValue = filterFns[filterValue] || filterValue;
+                filterValue = filterValue;
                 $grid.isotope({ filter: filterValue });
-            });
+            }
+        });
 
-            // change is-checked class on buttons
-            $('.button-group').each(function (i, buttonGroup) {
-                var $buttonGroup = $(buttonGroup);
-                $buttonGroup.on('click', 'button', function () {
-                    $buttonGroup.find('.is-checked').removeClass('is-checked');
-                    $(this).addClass('is-checked');
-                });
+        // bind filter button click
+        $('.filters-button-group').on('click', 'button', function () {
+            var filterValue = $(this).attr('data-filter');
+            // use filterFn if matches value
+            filterValue = filterValue;
+            $grid.isotope({ filter: filterValue });
+        });
+
+        // change is-checked class on buttons
+        $('.button-group').each(function (i, buttonGroup) {
+            var $buttonGroup = $(buttonGroup);
+            $buttonGroup.on('click', 'button', function () {
+                $buttonGroup.find('.is-checked').removeClass('is-checked');
+                $(this).addClass('is-checked');
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
+
 </html>
